@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Product_MVC.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "PRODUCTS";
+}
+
+<h1>PRODUCTS</h1>
+<form asp-action="Index" method="get">
+	<div>
+		<p>
+			Find Category: <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+			<input type="submit" value="Search" class="btn btn-success"/>|
+			<a asp-action="Index">Remove Filter</a>
+		</p>
+	</div>
+</form>
+<p>
+     <div class="col-6 text-left">
+		<a class="btn btn-info" asp-action="Create"><i class="fa-solid fa-motorcycle"></i> &nbsp;Add New Product</a>
+	</div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductData.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductData.product_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandData.brand_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierData.supplier_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryData.category_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductData.product_price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductData.Inventory.stock_product_quantity)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductData.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductData.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandData.brand_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierData.supplier_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryData.category_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductData.product_price)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.ProductData.Inventory.stock_product_quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ProductData.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ProductData.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ProductData.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

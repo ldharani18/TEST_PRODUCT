@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Product_MVC.Models.BrandData>
+
+@{
+    ViewData["Title"] = "BRANDS";
+}
+
+<h1>BRANDS</h1>
+
+<form asp-controller="Brand" asp-action="Index" method="get">
+	<div>
+		<p>
+			Find Brand: <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+			<input type="submit" value="Search" class="btn btn-success"/>|
+			<a asp-action="Index">Remove Filter</a>
+		</p>
+	</div>
+</form>
+
+ 
+<p>
+    <div class="col-6 text-left">
+		<a class="btn btn-info" asp-action="Create"><i class="fa-solid fa-motorcycle"></i> &nbsp;Add New Brand</a>
+	</div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.brand_name)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.brand_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

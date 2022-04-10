@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Product_MVC.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "INVENTORIES";
+}
+
+<h1>INVENTORIES</h1>
+<!--
+<p>
+     <div class="col-6 text-left">
+		<a class="btn btn-info" asp-action="Create"><i class="fa-solid fa-motorcycle"></i> &nbsp;Add New Inventory</a>
+	</div>
+</p>
+-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryData.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductData.product_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryData.stock_product_quantity)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryData.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductData.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryData.stock_product_quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.InventoryData.Id }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.InventoryData.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.InventoryData.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

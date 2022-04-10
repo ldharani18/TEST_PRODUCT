@@ -1,0 +1,91 @@
+﻿@using Product_MVC.Extensions
+@model Product_MVC.Models.ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<h2 class="text-info "> Edit Products</h2>
+
+<form method="post" enctype="multipart/form-data" action="Edit">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+     <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="ProductData.product_name"></label>
+        </div>
+        @Html.HiddenFor(model => model.Brands)
+        @Html.HiddenFor(model => model.Categories)
+        @Html.HiddenFor(model => model.Suppliers)
+        @Html.HiddenFor(model => model.ProductData.Id)
+        <div class="col-4">
+            <input asp-for="ProductData.product_name"  class="form-control"></input>
+            <span asp-validation-for="ProductData.product_name" class="text-danger"></span>
+        </div></div>
+    <br />
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="ProductData.CategoryId"></label>
+        </div>
+        <div class="col-4">
+            <select asp-for="ProductData.CategoryId" asp-items="IEnumerableExtensions.CategoryItem(Model.Categories)" id="Category" class="form-control"></select>
+            <span asp-validation-for="ProductData.CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+    <br />
+
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Brands"></label>
+        </div>
+        <div class="col-4">
+            <select asp-for="ProductData.BrandId" asp-items="IEnumerableExtensions.BrandItem(Model.Brands)" id="BrandData" class="form-control"></select>
+            <span asp-validation-for="ProductData.BrandId" class="text-danger"></span>
+            </div></div>
+    <br />
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Suppliers"></label>
+        </div>
+        <div class="col-4">
+            <select asp-for="ProductData.SupplierId" asp-items="IEnumerableExtensions.SupplierItem(Model.Suppliers)" id="SupplierData" class="form-control"></select>
+            <span asp-validation-for="ProductData.SupplierId" class="text-danger"></span>
+            </div></div>
+    <br />
+
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="ProductData.product_price"></label>
+        </div>
+        <div class="col-4">
+            <input asp-for="ProductData.product_price"  class="form-control"></input>
+            <span asp-validation-for="ProductData.product_price" class="text-danger"></span>
+        </div></div>
+    <br />
+
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="ProductData.Inventory.stock_product_quantity"></label>
+        </div>
+        <div class="col-4">
+            <input asp-for="ProductData.Inventory.stock_product_quantity"  class="form-control"></input>
+            <span asp-validation-for="ProductData.Inventory.stock_product_quantity" class="text-danger"></span>
+        </div></div>
+    <br />
+
+    
+    <br /><br />
+    <div class="form-group">
+        <input type="submit" class="btn btn-dark" value="Edit" />
+        <a asp-action="Index" class="btn btn-success">Back</a>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
